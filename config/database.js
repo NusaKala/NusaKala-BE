@@ -16,9 +16,9 @@ const connect = async () => {
     try {
         const dbClient = getClient();
         await dbClient.connect();
-        logger.info('✅ Database connected successfully');
+        logger.info('Database connected successfully');
     } catch (error) {
-        logger.error('❌ Database connection failed:', error);
+        logger.error('Database connection failed:', error);
         throw error;
     }
 };
@@ -27,7 +27,7 @@ const disconnect = async () => {
     if (client) {
         await client.end();
         client = null;
-        logger.info('🔌 Database connection closed');
+        logger.info('Database connection closed');
     }
 };
 
@@ -37,7 +37,7 @@ const query = async (text, params) => {
         const result = await dbClient.query(text, params);
         return result;
     } catch (error) {
-        logger.error('❌ Database query error:', error);
+        logger.error('Database query error:', error);
         throw error;
     }
 };
