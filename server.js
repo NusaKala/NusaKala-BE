@@ -1,8 +1,10 @@
-require('dotenv').config({ path: './env', quiet: 'true' });
+require('dotenv').config({ path: '.env', quiet: 'true' });
+
+const logger = require('./src/utils/logger');
 const app = require('./src/app');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    logger.info(`Server running on http://localhost:${PORT}`);
 });

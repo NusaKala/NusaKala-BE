@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const logger = require('../utils/logger');
 
 const users = [];
 
@@ -22,6 +23,7 @@ exports.login = async (username, password) => {
     const token = jwt.sign({ username }, process.env.JWT_SECRET, {
         expiresIn: '1h'
     });
+
 
     return token;
 };
