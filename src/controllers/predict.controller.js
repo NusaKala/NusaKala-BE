@@ -3,12 +3,13 @@ const predictService = require("../services/predict.service");
 exports.predictBatik = async (req, res) => {
     try {
         const imageBuffer = req.file.buffer; 
-        const result = await predictService.runModel(imageBuffer);
-        
+        const { prediction, confidence } = await predictService.runModel(imageBuffer);
+
 
         res.status(200).json({
             success: true,
-            prediction: result,
+            prediction: prediction,
+            confidence: confidence,
         });
     } catch (error) {
         console.error("Prediction error:", error);

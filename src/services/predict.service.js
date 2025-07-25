@@ -17,9 +17,9 @@ function bufferToTensor(buffer) {
     const numPixels = width * height;
     const rgbData = new Uint8Array(numPixels * 3);
     for (let i = 0; i < numPixels; i++) {
-        rgbData[i * 3 + 0] = data[i * 4 + 0]; 
-        rgbData[i * 3 + 1] = data[i * 4 + 1]; 
-        rgbData[i * 3 + 2] = data[i * 4 + 2]; 
+        rgbData[i * 3 + 0] = data[i * 4 + 0];
+        rgbData[i * 3 + 1] = data[i * 4 + 1];
+        rgbData[i * 3 + 2] = data[i * 4 + 2];
     }
 
     const imageTensor = tf.tensor3d(rgbData, [height, width, 3]);
@@ -36,5 +36,8 @@ exports.runModel = async (imageBuffer) => {
     const predictionArray = prediction.dataSync();
     const predictedIndex = predictionArray.indexOf(Math.max(...predictionArray));
 
-    return predictedIndex;
+    return {
+        prediction: predictedIndex,
+        confidence: predictionArray[predictedIndex]
+    };
 };
