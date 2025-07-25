@@ -16,7 +16,11 @@ database.connect().catch(err => {
 
 app.use(morgan('dev'));
 app.use(cors({
-    origin: 'https://nusa-kala-fe-yuae-q4hhwyz34-nanthedoms-projects.vercel.app/',
+    origin: [
+        process.env.CORS_ORIGIN,
+        'http://localhost:3000',
+        'https://nusa-kala-fe-yuae-q4hhwyz34-nanthedoms-projects.vercel.app'
+    ],
     credentials: true
 }));
 app.use(cookieParser());
