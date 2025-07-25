@@ -19,7 +19,8 @@ app.use(cors({
     origin: [
         process.env.CORS_ORIGIN,
         'http://localhost:3000',
-        'https://nusa-kala-fe-yuae-q4hhwyz34-nanthedoms-projects.vercel.app'
+        'https://nusa-kala-fe-yuae-q4hhwyz34-nanthedoms-projects.vercel.app',
+        'https://nusa-kala-fe-yuae.vercel.app'
     ],
     credentials: true
 }));
