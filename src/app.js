@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const routes = require('./routes/index');
 const database = require('../config/database');
+const path = require('path')
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api', routes);
+app.use('/model', express.static(path.join(__dirname, '..', 'public/model')));
 
 module.exports = app;
