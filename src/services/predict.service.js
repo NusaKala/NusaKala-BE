@@ -4,7 +4,7 @@ const jpeg = require("jpeg-js");
 let modelPromise = null;
 async function loadModel() {
     if (!modelPromise) {
-        const modelUrl = 'http://localhost:3001/model/tfjs-mod/model.json';
+        const modelUrl = 'https://nusakala-be-production.up.railway.app/model/tfjs-mod/model.json';
         modelPromise = tf.loadGraphModel(modelUrl);
     }
     return modelPromise;
