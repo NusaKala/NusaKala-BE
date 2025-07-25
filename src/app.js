@@ -16,7 +16,7 @@ database.connect().catch(err => {
 
 app.use(morgan('dev'));
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: 'https://nusa-kala-fe-yuae-q4hhwyz34-nanthedoms-projects.vercel.app/',
     credentials: true
 }));
 app.use(cookieParser());
