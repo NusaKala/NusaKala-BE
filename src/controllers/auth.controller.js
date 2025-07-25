@@ -74,7 +74,12 @@ exports.login = async (req, res) => {
         
         res.status(200).json({
             message: 'Login successful',
-            user: result.user
+            user: result.user,
+            session: {
+                accessToken: result.accessToken,
+                refreshToken: result.refreshToken,
+                expiresIn: 15 * 60 * 1000 // 15 minutes
+            }
         });
     } catch (err) {
         logger.error('Login controller error:', err);

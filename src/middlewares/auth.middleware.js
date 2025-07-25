@@ -3,8 +3,16 @@ const logger = require('../utils/logger');
 
 module.exports = (req, res, next) => {
     try {
-        // Check for access token in cookies first
-        const accessToken = req.cookies.accessToken;
+        // Check for access token in cookies first, then Authorization header
+        let accessToken = req.cookies.accessToken;
+        
+        // If not in cookies, check Authorization header
+        if (!accessToken) {
+            const authHeader = req.headers.authorization;
+            if (authHeader && authHeader.startsWith('Bearer ')) {
+                accessToken = authHeader.substring(7); // Remove 'Bearer ' prefix
+            }
+        }
 
         if (!accessToken) {
             return res.status(401).json({
@@ -44,7 +52,15 @@ module.exports = (req, res, next) => {
 // Optional middleware for routes that can work with or without authentication
 module.exports.optional = (req, res, next) => {
     try {
-        const accessToken = req.cookies.accessToken;
+        let accessToken = req.cookies.accessToken;
+        
+        // If not in cookies, check Authorization header
+        if (!accessToken) {
+            const authHeader = req.headers.authorization;
+            if (authHeader && authHeader.startsWith('Bearer ')) {
+                accessToken = authHeader.substring(7); // Remove 'Bearer ' prefix
+            }
+        }
 
         if (!accessToken) {
             return next(); // Continue without user info

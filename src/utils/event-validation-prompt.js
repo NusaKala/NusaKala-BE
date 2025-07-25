@@ -1,101 +1,103 @@
 const generateEventValidationPrompt = (eventData) => {
     return `
-ANALISIS VALIDASI EVENT BUDAYA INDONESIA
+INDONESIAN CULTURAL EVENT VALIDATION ANALYSIS
 
-TUGAS: Analisis konten event untuk validasi dengan fokus pada SARA, relevansi budaya, dan kualitas konten.
+TASK: Analyze the event content for validation with a focus on SARA (Ethnicity, Religion, Race, and Inter-group), cultural relevance, and content quality.
+
+IMPORTANT: Your response must be in English.
 
 EVENT DATA:
-Nama Event: ${eventData.name || 'N/A'}
-Deskripsi: ${eventData.description || 'N/A'}
-Kategori: ${eventData.types ? eventData.types.join(', ') : 'N/A'}
-Lokasi: ${eventData.place_name || 'N/A'}
-Waktu: ${eventData.start_datetime ? new Date(eventData.start_datetime).toLocaleDateString('id-ID') : 'N/A'} - ${eventData.end_datetime ? new Date(eventData.end_datetime).toLocaleDateString('id-ID') : 'N/A'}
+Event Name: ${eventData.name || 'N/A'}
+Description: ${eventData.description || 'N/A'}
+Category: ${eventData.types ? eventData.types.join(', ') : 'N/A'}
+Location: ${eventData.place_name || 'N/A'}
+Time: ${eventData.start_datetime ? new Date(eventData.start_datetime).toLocaleDateString('en-US') : 'N/A'} - ${eventData.end_datetime ? new Date(eventData.end_datetime).toLocaleDateString('en-US') : 'N/A'}
 
-INSTRUKSI ANALISIS:
+ANALYSIS INSTRUCTIONS:
 
-1. SARA CONTENT CHECK (Suku, Agama, Ras, dan Antar-golongan):
-   - Identifikasi kata-kata atau frasa yang berpotensi diskriminatif
-   - Analisis konteks penggunaan kata-kata terkait SARA
-   - Evaluasi apakah konten mempromosikan kesatuan atau perpecahan
-   - Periksa sensitivitas budaya dan inklusivitas
+1. SARA CONTENT CHECK (Ethnicity, Religion, Race, and Inter-group):
+   - Identify words or phrases with potential discriminatory meaning
+   - Analyze the context of SARA-related words usage
+   - Evaluate whether the content promotes unity or division
+   - Check for cultural sensitivity and inclusivity
 
 2. CULTURAL RELEVANCE CHECK:
-   - Evaluasi keterkaitan dengan budaya Indonesia
-   - Periksa akurasi informasi budaya
-   - Analisis nilai warisan budaya
-   - Cek relevansi regional dan lokal
+   - Evaluate the connection to Indonesian culture
+   - Check the accuracy of cultural information
+   - Analyze the value of cultural heritage
+   - Check for regional and local relevance
 
 3. CONTENT QUALITY ASSESSMENT:
-   - Evaluasi kejelasan dan kelengkapan informasi
-   - Periksa profesionalisme dan struktur konten
-   - Analisis akurasi informasi yang disampaikan
-   - Cek konsistensi dengan kategori event
+   - Evaluate the clarity and completeness of information
+   - Check professionalism and content structure
+   - Analyze the accuracy of the information provided
+   - Check consistency with the event category
 
 4. APPROPRIATENESS EVALUATION:
-   - Periksa kesesuaian konten untuk semua umur
-   - Evaluasi kesopanan dan penghormatan budaya
-   - Analisis keamanan dan keselamatan konten
-   - Cek kesesuaian dengan nilai-nilai Indonesia
+   - Check if the content is suitable for all ages
+   - Evaluate politeness and respect for culture
+   - Analyze the safety and security of the content
+   - Check alignment with Indonesian values
 
 SCORING SYSTEM:
-- POSITIF (0.8-1.0): Konten sangat baik, aman, dan relevan
-- NETRAL (0.6-0.79): Konten cukup baik, perlu review manual
-- NEGATIF (0.0-0.59): Konten bermasalah, perlu ditolak
+- POSITIVE (0.8-1.0): Content is very good, safe, and relevant
+- NEUTRAL (0.6-0.79): Content is fairly good, needs manual review
+- NEGATIVE (0.0-0.59): Problematic content, should be rejected
 
-KELUARAN YANG DIMINTA (JSON FORMAT):
+EXPECTED OUTPUT (JSON FORMAT):
 
 {
   "saraAnalysis": {
     "score": 0.95,
-    "status": "POSITIF",
-    "reasoning": "Konten fokus pada promosi budaya tanpa elemen diskriminatif",
+    "status": "POSITIVE",
+    "reasoning": "Content focuses on cultural promotion without discriminatory elements",
     "detectedKeywords": [],
     "saraFlags": {
-      "suku": { "detected": false, "keywords": [], "context": "Tidak ada referensi diskriminatif suku" },
-      "agama": { "detected": false, "keywords": [], "context": "Tidak ada referensi diskriminatif agama" },
-      "ras": { "detected": false, "keywords": [], "context": "Tidak ada referensi diskriminatif ras" },
-      "antarGolongan": { "detected": false, "keywords": [], "context": "Tidak ada referensi diskriminatif golongan" }
+      "ethnicity": { "detected": false, "keywords": [], "context": "No discriminatory ethnic references" },
+      "religion": { "detected": false, "keywords": [], "context": "No discriminatory religious references" },
+      "race": { "detected": false, "keywords": [], "context": "No discriminatory racial references" },
+      "interGroup": { "detected": false, "keywords": [], "context": "No discriminatory inter-group references" }
     },
-    "culturalSensitivity": "Tinggi",
-    "inclusivity": "Baik"
+    "culturalSensitivity": "High",
+    "inclusivity": "Good"
   },
   "culturalRelevance": {
     "score": 0.92,
-    "status": "POSITIF",
-    "reasoning": "Event sangat relevan dengan budaya Indonesia",
-    "indonesianElements": ["batik", "tradisional", "Solo", "warisan"],
-    "regionalAccuracy": "Tinggi",
-    "heritageValue": "Signifikan",
-    "localAuthenticity": "Terverifikasi"
+    "status": "POSITIVE",
+    "reasoning": "Event is highly relevant to Indonesian culture",
+    "indonesianElements": ["batik", "traditional", "Solo", "heritage"],
+    "regionalAccuracy": "High",
+    "heritageValue": "Significant",
+    "localAuthenticity": "Verified"
   },
   "contentQuality": {
     "score": 0.88,
-    "status": "POSITIF",
-    "reasoning": "Konten jelas, lengkap, dan profesional",
-    "clarity": "Tinggi",
-    "completeness": "Baik",
-    "professionalism": "Tinggi",
-    "accuracy": "Tinggi"
+    "status": "POSITIVE",
+    "reasoning": "Content is clear, complete, and professional",
+    "clarity": "High",
+    "completeness": "Good",
+    "professionalism": "High",
+    "accuracy": "High"
   },
   "appropriateness": {
     "score": 0.90,
-    "status": "POSITIF",
-    "reasoning": "Konten sesuai untuk semua umur dan menghormati budaya",
-    "safety": "Aman",
-    "respectfulness": "Tinggi",
-    "culturalSensitivity": "Tinggi",
-    "ageAppropriateness": "Semua umur"
+    "status": "POSITIVE",
+    "reasoning": "Content is suitable for all ages and respects culture",
+    "safety": "Safe",
+    "respectfulness": "High",
+    "culturalSensitivity": "High",
+    "ageAppropriateness": "All ages"
   },
   "overallAssessment": {
     "score": 0.91,
-    "status": "POSITIF",
+    "status": "POSITIVE",
     "recommendation": "auto_approve",
     "confidence": 0.95
   },
   "warnings": [],
   "suggestions": [
-    "Pertimbangkan menambahkan detail workshop yang lebih spesifik",
-    "Sertakan informasi harga jika ada"
+    "Consider adding more specific workshop details",
+    "Include price information if available"
   ],
   "flags": {
     "saraFlag": false,
@@ -105,101 +107,103 @@ KELUARAN YANG DIMINTA (JSON FORMAT):
   }
 }
 
-CATATAN PENTING:
-- Selalu berikan reasoning yang jelas dan spesifik
-- Jika ada elemen SARA yang terdeteksi, jelaskan konteksnya
-- Berikan warning jika ada potensi masalah
-- Scoring harus konsisten: POSITIF (0.8-1.0), NETRAL (0.6-0.79), NEGATIF (0.0-0.59)
-- Jika score di bawah 0.6, berikan alasan penolakan yang jelas
-- Jika ada konten yang ambigu, rekomendasikan review manual
+IMPORTANT NOTES:
+- Always provide clear and specific reasoning
+- If any SARA element is detected, explain the context
+- Provide warnings if there are potential issues
+- Scoring must be consistent: POSITIVE (0.8-1.0), NEUTRAL (0.6-0.79), NEGATIVE (0.0-0.59)
+- If the score is below 0.6, provide a clear reason for rejection
+- If there is ambiguous content, recommend manual review
 
-ANALISIS KONTEN BERIKUT:
+ANALYZE THE FOLLOWING CONTENT:
 `;
 };
 
 const generateEventUpdateValidationPrompt = (originalEvent, updatedEvent) => {
     return `
-ANALISIS VALIDASI UPDATE EVENT BUDAYA INDONESIA
+INDONESIAN CULTURAL EVENT UPDATE VALIDATION ANALYSIS
 
-TUGAS: Analisis perubahan konten event untuk validasi dengan fokus pada dampak terhadap SARA, budaya, dan kualitas.
+TASK: Analyze the changes in event content for validation with a focus on the impact on SARA, culture, and quality.
 
-EVENT ASLI:
-Nama: ${originalEvent.name || 'N/A'}
-Deskripsi: ${originalEvent.description || 'N/A'}
-Kategori: ${originalEvent.types ? originalEvent.types.join(', ') : 'N/A'}
+IMPORTANT: Your response must be in English.
+
+ORIGINAL EVENT:
+Name: ${originalEvent.name || 'N/A'}
+Description: ${originalEvent.description || 'N/A'}
+Category: ${originalEvent.types ? originalEvent.types.join(', ') : 'N/A'}
 Status: ${originalEvent.status || 'N/A'}
 
-PERUBAHAN EVENT:
-Nama: ${updatedEvent.name || 'N/A'}
-Deskripsi: ${updatedEvent.description || 'N/A'}
-Kategori: ${updatedEvent.types ? updatedEvent.types.join(', ') : 'N/A'}
+UPDATED EVENT:
+Name: ${updatedEvent.name || 'N/A'}
+Description: ${updatedEvent.description || 'N/A'}
+Category: ${updatedEvent.types ? updatedEvent.types.join(', ') : 'N/A'}
 
-INSTRUKSI ANALISIS:
+ANALYSIS INSTRUCTIONS:
 
-1. PERBANDINGAN SARA CONTENT:
-   - Bandingkan konten asli vs konten baru
-   - Identifikasi perubahan yang mempengaruhi SARA
-   - Evaluasi apakah perubahan memperbaiki atau memperburuk sensitivitas
+1. SARA CONTENT COMPARISON:
+   - Compare original vs new content
+   - Identify changes affecting SARA
+   - Evaluate whether the changes improve or worsen sensitivity
 
-2. PERUBAHAN CULTURAL RELEVANCE:
-   - Analisis dampak perubahan terhadap relevansi budaya
-   - Evaluasi apakah perubahan meningkatkan atau menurunkan nilai budaya
-   - Periksa konsistensi dengan kategori event
+2. CULTURAL RELEVANCE CHANGES:
+   - Analyze the impact of changes on cultural relevance
+   - Evaluate whether the changes increase or decrease cultural value
+   - Check consistency with the event category
 
-3. PERUBAHAN CONTENT QUALITY:
-   - Bandingkan kualitas konten sebelum dan sesudah
-   - Evaluasi apakah perubahan meningkatkan kejelasan dan kelengkapan
-   - Analisis dampak terhadap profesionalisme
+3. CONTENT QUALITY CHANGES:
+   - Compare content quality before and after
+   - Evaluate whether the changes improve clarity and completeness
+   - Analyze the impact on professionalism
 
 4. APPROPRIATENESS CHANGES:
-   - Evaluasi dampak perubahan terhadap kesesuaian konten
-   - Periksa apakah perubahan mempengaruhi keselamatan atau kesopanan
-   - Analisis dampak terhadap sensitivitas budaya
+   - Evaluate the impact of changes on content appropriateness
+   - Check if the changes affect safety or politeness
+   - Analyze the impact on cultural sensitivity
 
 SCORING SYSTEM:
-- POSITIF (0.8-1.0): Perubahan memperbaiki kualitas
-- NETRAL (0.6-0.79): Perubahan netral, perlu review
-- NEGATIF (0.0-0.59): Perubahan memperburuk kualitas
+- POSITIVE (0.8-1.0): Changes improve quality
+- NEUTRAL (0.6-0.79): Changes are neutral, need review
+- NEGATIVE (0.0-0.59): Changes worsen quality
 
-KELUARAN YANG DIMINTA (JSON FORMAT):
+EXPECTED OUTPUT (JSON FORMAT):
 
 {
   "changeAnalysis": {
     "saraImpact": {
       "score": 0.95,
-      "status": "POSITIF",
-      "reasoning": "Perubahan tidak mempengaruhi elemen SARA",
+      "status": "POSITIVE",
+      "reasoning": "Changes do not affect SARA elements",
       "improvements": [],
       "concerns": []
     },
     "culturalImpact": {
       "score": 0.88,
-      "status": "POSITIF", 
-      "reasoning": "Perubahan meningkatkan relevansi budaya",
-      "improvements": ["Menambah detail budaya"],
+      "status": "POSITIVE", 
+      "reasoning": "Changes increase cultural relevance",
+      "improvements": ["Added more cultural details"],
       "concerns": []
     },
     "qualityImpact": {
       "score": 0.85,
-      "status": "POSITIF",
-      "reasoning": "Perubahan meningkatkan kualitas konten",
-      "improvements": ["Informasi lebih lengkap"],
+      "status": "POSITIVE",
+      "reasoning": "Changes improve content quality",
+      "improvements": ["More complete information"],
       "concerns": []
     }
   },
   "overallChangeAssessment": {
     "score": 0.89,
-    "status": "POSITIF",
+    "status": "POSITIVE",
     "recommendation": "auto_approve",
-    "reasoning": "Perubahan secara keseluruhan memperbaiki kualitas event"
+    "reasoning": "Overall, the changes improve the event quality"
   },
   "warnings": [],
   "suggestions": [
-    "Pertimbangkan menambahkan detail lokasi yang lebih spesifik"
+    "Consider adding more specific location details"
   ]
 }
 
-ANALISIS PERUBAHAN KONTEN BERIKUT:
+ANALYZE THE FOLLOWING CONTENT CHANGES:
 `;
 };
 
